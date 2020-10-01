@@ -231,6 +231,26 @@ class InitializationProtocolMock: InitializationProtocol {
     }
 
 }
+class PhotosAPIMock: PhotosAPI {
+
+    //MARK: - getPhotos
+
+    var getPhotosQueryPageNumberPageSizeCallsCount = 0
+    var getPhotosQueryPageNumberPageSizeCalled: Bool {
+        return getPhotosQueryPageNumberPageSizeCallsCount > 0
+    }
+    var getPhotosQueryPageNumberPageSizeReceivedArguments: (query: String, pageNumber: UInt, pageSize: UInt)?
+    var getPhotosQueryPageNumberPageSizeReceivedInvocations: [(query: String, pageNumber: UInt, pageSize: UInt)] = []
+    var getPhotosQueryPageNumberPageSizeClosure: ((String, UInt, UInt) -> Void)?
+
+    func getPhotos(query: String,                   pageNumber: UInt,                   pageSize: UInt) {
+        getPhotosQueryPageNumberPageSizeCallsCount += 1
+        getPhotosQueryPageNumberPageSizeReceivedArguments = (query: query, pageNumber: pageNumber, pageSize: pageSize)
+        getPhotosQueryPageNumberPageSizeReceivedInvocations.append((query: query, pageNumber: pageNumber, pageSize: pageSize))
+        getPhotosQueryPageNumberPageSizeClosure?(query, pageNumber, pageSize)
+    }
+
+}
 class ReservedWordsProtocolMock: ReservedWordsProtocol {
 
     //MARK: - `continue`

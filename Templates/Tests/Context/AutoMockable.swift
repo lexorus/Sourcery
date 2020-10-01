@@ -10,6 +10,12 @@ import Foundation
 
 protocol AutoMockable {}
 
+protocol PhotosAPI: AutoMockable {
+    func getPhotos(query: String,
+                   pageNumber: UInt,
+                   pageSize: UInt)
+}
+
 protocol BasicProtocol: AutoMockable {
     func loadConfiguration() -> String?
     /// Asks a Duck to quack
